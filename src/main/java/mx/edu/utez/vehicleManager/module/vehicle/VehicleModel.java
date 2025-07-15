@@ -1,4 +1,4 @@
-package mx.edu.utez.vehicleManager.module.vehicle.model;
+package mx.edu.utez.vehicleManager.module.vehicle;
 
 import java.sql.Date;
 import java.util.List;
@@ -14,9 +14,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import mx.edu.utez.vehicleManager.module.brand.model.BrandModel;
-import mx.edu.utez.vehicleManager.module.customer.model.CustomerModel;
-import mx.edu.utez.vehicleManager.module.service.model.ServiceModel;
+import mx.edu.utez.vehicleManager.module.brand.BrandModel;
+import mx.edu.utez.vehicleManager.module.customer.CustomerModel;
+import mx.edu.utez.vehicleManager.module.service.ServiceModel;
 
 @Entity
 @Table(name = "vehicle")

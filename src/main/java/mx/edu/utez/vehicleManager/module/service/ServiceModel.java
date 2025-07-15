@@ -1,4 +1,4 @@
-package mx.edu.utez.vehicleManager.module.service.model;
+package mx.edu.utez.vehicleManager.module.service;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import mx.edu.utez.vehicleManager.module.vehicle.model.VehicleModel;
+import mx.edu.utez.vehicleManager.module.vehicle.VehicleModel;
 
 @Entity
 @Table(name = "service")
