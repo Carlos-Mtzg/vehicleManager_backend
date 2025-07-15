@@ -1,4 +1,4 @@
-package mx.edu.utez.vehicleManager.module.brand.model;
+package mx.edu.utez.vehicleManager.module.role;
 
 import java.util.List;
 
@@ -10,20 +10,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import mx.edu.utez.vehicleManager.module.vehicle.model.VehicleModel;
+import mx.edu.utez.vehicleManager.module.employee.EmployeeModel;
 
 @Entity
-@Table(name = "brand")
-public class BrandModel {
+@Table(name = "role")
+public class RoleModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "role")
     @JsonIgnore
-    private List<VehicleModel> vehicles;
+    private List<EmployeeModel> employees;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class BrandModel {
         this.name = name;
     }
 
-    public List<VehicleModel> getVehicles() {
-        return vehicles;
+    public List<EmployeeModel> getEmployees() {
+        return employees;
     }
 
-    public void setVehicles(List<VehicleModel> vehicles) {
-        this.vehicles = vehicles;
+    public void setEmployees(List<EmployeeModel> employees) {
+        this.employees = employees;
     }
 
 }
