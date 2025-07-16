@@ -1,6 +1,7 @@
 package mx.edu.utez.vehicleManager.module.vehicle;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,16 +47,14 @@ public class VehicleModel {
     @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
     private String color;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
-    private Date registration_date;
+    private LocalDate registration_date;
 
-    @NotNull(message = NOT_BLANK_MESSAGE)
+    @NotNull(message = NOT_NULL_MESSAGE)
     @Positive(message = "El precio debe ser mayor a 0")
     @Digits(integer = 7, fraction = 2, message = "El precio debe tener máximo 7 dígitos enteros y 2 decimales")
-    private Double price;
+    private BigDecimal price;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
-    private Date sale_date;
+    private LocalDate sale_date;
 
     @NotNull(message = NOT_NULL_MESSAGE)
     @ManyToOne
@@ -97,27 +96,19 @@ public class VehicleModel {
         this.color = color;
     }
 
-    public Date getRegistration_date() {
+    public LocalDate getRegistration_date() {
         return registration_date;
     }
 
-    public void setRegistration_date(Date registration_date) {
+    public void setRegistration_date(LocalDate registration_date) {
         this.registration_date = registration_date;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Date getSale_date() {
+    public LocalDate getSale_date() {
         return sale_date;
     }
 
-    public void setSale_date(Date sale_date) {
+    public void setSale_date(LocalDate sale_date) {
         this.sale_date = sale_date;
     }
 
@@ -143,6 +134,14 @@ public class VehicleModel {
 
     public void setServices(List<ServiceModel> services) {
         this.services = services;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
 }
