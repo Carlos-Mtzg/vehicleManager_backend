@@ -36,6 +36,10 @@ public class ServiceService {
 
     @Transactional
     public ResponseEntity<Object> save(ServiceModel service) {
+        if (repository.existsByCode(service.getCode())) {
+            return Utilities.generateResponse(HttpStatus.CONFLICT, "El código del servicio ya está registrado",
+                    null);
+        }
         try {
             ServiceModel savedService = this.repository.save(service);
             return Utilities.generateResponse(HttpStatus.CREATED, "Servicio guardado exitosamente", savedService);
