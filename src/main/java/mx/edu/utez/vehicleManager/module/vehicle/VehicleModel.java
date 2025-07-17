@@ -56,17 +56,14 @@ public class VehicleModel {
 
     private LocalDate sale_date;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private BrandModel brand;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private CustomerModel customer;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
     @ManyToMany
     @JoinTable(name = "vehicle_has_services", joinColumns = @JoinColumn(name = "car_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
     @JsonIgnore

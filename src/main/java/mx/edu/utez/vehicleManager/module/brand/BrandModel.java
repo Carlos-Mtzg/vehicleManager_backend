@@ -34,7 +34,6 @@ public class BrandModel {
     @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
     private String name;
 
-    @NotNull(message = NOT_NULL_MESSAGE)
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
     private List<VehicleModel> vehicles;
