@@ -25,7 +25,7 @@ public class ServiceDto {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name != null ? name.trim() : null;
     }
 
     public String getDescription() {
@@ -33,7 +33,7 @@ public class ServiceDto {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description != null ? description.trim() : null;
     }
 
     public BigDecimal getPrice() {
