@@ -35,6 +35,8 @@ public class CustomerModel {
 	@JoinColumn(name = "employee_id")
 	private EmployeeModel employee;
 
+	//#region Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
