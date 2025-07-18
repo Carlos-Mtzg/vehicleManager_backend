@@ -12,6 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import mx.edu.utez.vehicleManager.module.customer.CustomerModel;
 import mx.edu.utez.vehicleManager.module.role.RoleModel;
 
@@ -19,12 +23,27 @@ import mx.edu.utez.vehicleManager.module.role.RoleModel;
 @Table(name = "employee")
 public class EmployeeModel {
 
+    public static final String NOT_BLANK_MESSAGE = "Este campo no puede estar vacío";
+    public static final String NO_ANGLE_BRACKETS_MESSAGE = "No se permiten los caracteres < o >";
+    public static final String NOT_NULL_MESSAGE = "Este campo es obligatorio";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
     private String full_name;
+
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 10, message = "Este campo no puede tener más de 10 caracteres")
     private String phone;
+
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Email(message = "Este correo electrónico no es válido")
     private String email;
 
     @ManyToOne

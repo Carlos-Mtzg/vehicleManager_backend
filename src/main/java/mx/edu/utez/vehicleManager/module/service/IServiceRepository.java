@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IServiceRepository extends JpaRepository<ServiceModel, Long> {
 
+    boolean existsByCode(String code);
 }

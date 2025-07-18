@@ -12,6 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import mx.edu.utez.vehicleManager.module.employee.EmployeeModel;
 import mx.edu.utez.vehicleManager.module.vehicle.VehicleModel;
 
@@ -19,80 +23,95 @@ import mx.edu.utez.vehicleManager.module.vehicle.VehicleModel;
 @Table(name = "customer")
 public class CustomerModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    public static final String NOT_BLANK_MESSAGE = "Este campo no puede estar vacío";
+    public static final String NO_ANGLE_BRACKETS_MESSAGE = "No se permiten los caracteres < o >";
+    public static final String NOT_NULL_MESSAGE = "Este campo es obligatorio";
 
-	private String full_name;
-	private String phone;
-	private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@OneToMany(mappedBy = "customer")
-	@JsonIgnore
-	private List<VehicleModel> vehicles;
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
+    private String full_name;
 
-	@ManyToOne
-	@JoinColumn(name = "employee_id")
-	private EmployeeModel employee;
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 10, message = "Este campo no puede tener más de 10 caracteres")
+    private String phone;
 
-	//#region Getters and Setters
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Email(message = "Este correo electrónico no es válido")
+    private String email;
 
-	public Long getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    private List<VehicleModel> vehicles;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private EmployeeModel employee;
 
-	public String getFull_name() {
-		return full_name;
-	}
+    // #region Getters and Setters
 
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getFull_name() {
+        return full_name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public List<VehicleModel> getVehicles() {
-		return vehicles;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setVehicles(List<VehicleModel> vehicles) {
-		this.vehicles = vehicles;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	//#endregion
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	//#region Constructors
+    public List<VehicleModel> getVehicles() {
+        return vehicles;
+    }
 
-	public CustomerModel() {
-		super();
-	}
+    public void setVehicles(List<VehicleModel> vehicles) {
+        this.vehicles = vehicles;
+    }
 
-	public CustomerModel(Long id, String full_name, String phone, String email) {
-		super();
-		this.id = id;
-		this.full_name = full_name;
-		this.phone = phone;
-		this.email = email;
-	}
+    // #endregion
 
-	//#endregion
+    // #region Constructors
+
+    public CustomerModel() {
+        super();
+    }
+
+    public CustomerModel(Long id, String full_name, String phone, String email) {
+        super();
+        this.id = id;
+        this.full_name = full_name;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    // #endregion
 
 }
