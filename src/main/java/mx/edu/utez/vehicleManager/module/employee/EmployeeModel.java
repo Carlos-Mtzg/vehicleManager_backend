@@ -27,6 +27,7 @@ public class EmployeeModel {
     private String phone;
     private String email;
 
+
     //Relations
     @ManyToOne
     @JoinColumn(name = "role_id")
@@ -40,7 +41,8 @@ public class EmployeeModel {
         return id;
     }
 
-    //Getters and Setters
+
+     //Getters and Setters
     public void setId(Long id) {
         this.id = id;
     }
