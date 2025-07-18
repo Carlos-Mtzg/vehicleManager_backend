@@ -77,4 +77,22 @@ public class CustomerModel {
 		this.vehicles = vehicles;
 	}
 
+	//#endregion
+
+	//#region Constructors
+
+	public CustomerModel() {
+		super();
+	}
+
+	public CustomerModel(Long id, String full_name, String phone, String email) {
+		super();
+		this.id = id;
+		this.full_name = full_name;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	//#endregion
+
 }
