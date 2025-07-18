@@ -54,6 +54,8 @@ public class CustomerModel {
     @JoinColumn(name = "employee_id")
     private EmployeeModel employee;
 
+    // #region Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -93,5 +95,23 @@ public class CustomerModel {
     public void setVehicles(List<VehicleModel> vehicles) {
         this.vehicles = vehicles;
     }
+
+    // #endregion
+
+    // #region Constructors
+
+    public CustomerModel() {
+        super();
+    }
+
+    public CustomerModel(Long id, String full_name, String phone, String email) {
+        super();
+        this.id = id;
+        this.full_name = full_name;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    // #endregion
 
 }
