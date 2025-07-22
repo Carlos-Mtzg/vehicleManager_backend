@@ -50,8 +50,8 @@ public class CustomerModel {
     @JsonIgnore
     private List<VehicleModel> vehicles;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeModel employee;
 
     // #region Getters and Setters
@@ -96,22 +96,12 @@ public class CustomerModel {
         this.vehicles = vehicles;
     }
 
-    // #endregion
-
-    // #region Constructors
-
-    public CustomerModel() {
-        super();
+    public EmployeeModel getEmployee() {
+        return employee;
     }
 
-    public CustomerModel(Long id, String full_name, String phone, String email) {
-        super();
-        this.id = id;
-        this.full_name = full_name;
-        this.phone = phone;
-        this.email = email;
+    public void setEmployee(EmployeeModel employee) {
+        this.employee = employee;
     }
-
-    // #endregion
 
 }
