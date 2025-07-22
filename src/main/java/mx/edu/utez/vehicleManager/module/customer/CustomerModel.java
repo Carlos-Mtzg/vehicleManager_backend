@@ -50,8 +50,8 @@ public class CustomerModel {
     @JsonIgnore
     private List<VehicleModel> vehicles;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeModel employee;
 
     public Long getId() {
@@ -92,6 +92,14 @@ public class CustomerModel {
 
     public void setVehicles(List<VehicleModel> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    public EmployeeModel getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeModel employee) {
+        this.employee = employee;
     }
 
 }
