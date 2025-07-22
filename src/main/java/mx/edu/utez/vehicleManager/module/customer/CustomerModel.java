@@ -54,6 +54,8 @@ public class CustomerModel {
     @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeModel employee;
 
+    // #region Getters and Setters
+
     public Long getId() {
         return id;
     }
