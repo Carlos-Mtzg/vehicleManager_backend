@@ -34,7 +34,7 @@ public class VehicleDto {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.model = model != null ? model.trim() : null;
     }
 
     public String getColor() {
@@ -42,7 +42,7 @@ public class VehicleDto {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = color != null ? color.trim() : null;
     }
 
     public BigDecimal getPrice() {
