@@ -36,6 +36,7 @@ public class SaleService {
         this.serviceRepository = serviceRepository;
     }
 
+    @Transactional
     public ResponseEntity<Object> generateSale(SaleDto dto) {
         try {
             Optional<VehicleModel> vehicleOpt = vehicleRepository.findById(dto.getVehicleId());
