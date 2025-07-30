@@ -21,12 +21,10 @@ public class RoleModel {
     private Long id;
     private String name;
 
-    // Relations
     @OneToMany(mappedBy = "role")
     @JsonIgnore
     private List<EmployeeModel> employees;
 
-    // Getter and Setters
     public Long getId() {
         return id;
     }

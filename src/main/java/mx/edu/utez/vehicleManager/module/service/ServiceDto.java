@@ -8,11 +8,13 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public class ServiceDto {
-    @Pattern(regexp = "^[^<>]*$", message = "No se permiten < o >")
+    public static final String NO_ANGLE_BRACKETS_MESSAGE = "No se permiten los caracteres < o >";
+
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 50)
     private String name;
 
-    @Pattern(regexp = "^[^<>]*$", message = "No se permiten < o >")
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 150)
     private String description;
 

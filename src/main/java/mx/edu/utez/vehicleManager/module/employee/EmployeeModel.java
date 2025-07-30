@@ -46,8 +46,6 @@ public class EmployeeModel {
     @Email(message = "Este correo electrónico no es válido")
     private String email;
 
-
-    //Relations
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleModel role;
@@ -60,8 +58,6 @@ public class EmployeeModel {
         return id;
     }
 
-
-     //Getters and Setters
     public void setId(Long id) {
         this.id = id;
     }

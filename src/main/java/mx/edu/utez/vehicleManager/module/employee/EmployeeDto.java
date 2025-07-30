@@ -5,15 +5,17 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class EmployeeDto {
-    @Pattern(regexp = "^[^<>]*$", message = "No se permiten los caracteres < o >")
+    public static final String NO_ANGLE_BRACKETS_MESSAGE = "No se permiten los caracteres < o >";
+
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")
     private String full_name;
 
-    @Pattern(regexp = "^[^<>]*$", message = "No se permiten los caracteres < o >")
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 10, message = "El teléfono no puede tener más de 10 caracteres")
     private String phone;
 
-    @Pattern(regexp = "^[^<>]*$", message = "No se permiten los caracteres < o >")
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Email(message = "Este correo electrónico no es válido")
     private String email;
 
