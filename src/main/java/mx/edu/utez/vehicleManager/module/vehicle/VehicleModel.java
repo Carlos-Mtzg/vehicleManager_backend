@@ -61,7 +61,7 @@ public class VehicleModel {
     private BrandModel brand;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = true)
     private CustomerModel customer;
 
     @ManyToMany
