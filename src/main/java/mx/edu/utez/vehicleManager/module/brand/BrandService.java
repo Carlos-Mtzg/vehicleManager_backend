@@ -1,6 +1,7 @@
 package mx.edu.utez.vehicleManager.module.brand;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
@@ -38,6 +39,12 @@ public class BrandService {
     @Transactional
     public ResponseEntity<Object> save(BrandModel brand) {
         try {
+            String upperName = brand.getName().toUpperCase();
+            Optional<BrandModel> brandOpt = repository.findByName(upperName);
+            if (brandOpt.isPresent()) {
+                return Utilities.generateResponse(HttpStatus.CONFLICT, "Esta marca ya se encuentra registrada", null);
+            }
+            brand.setName(upperName);
             BrandModel saveBrand = this.repository.save(brand);
             return Utilities.generateResponse(HttpStatus.CREATED, "Marca guardada exitosamente", saveBrand);
         } catch (Exception e) {
