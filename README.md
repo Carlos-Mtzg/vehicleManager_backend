@@ -67,6 +67,13 @@ Backend desarrollado en Java con Spring Boot para la gestión de vehículos, mar
   - `PUT /api/employee/{id}` - Actualizar empleado
   - `DELETE /api/employee/{id}` - Eliminar empleado
 
+- **Ventas**
+  - `POST /api/sale` - Registrar una venta
+
+- **Estadísticas de vehículos**
+  - `GET /api/vehicle/sold/count` - Obtener cantidad de autos vendidos
+  - `GET /api/vehicle/available/count` - Obtener cantidad de autos disponibles
+
 *(Consulta los controladores para más endpoints)*
 
 ## Ejemplo de JSON para POST
@@ -118,3 +125,13 @@ Backend desarrollado en Java con Spring Boot para la gestión de vehículos, mar
   "role": { "id": 1 }
 }
 ```
+
+**Venta**
+```json
+{
+  "vehicleId": 4,
+  "customerId": 1,
+  "serviceIds": [1, 2]
+}
+```
+> Para el POST de venta debes enviar el id del vehículo, el id del cliente y una lista de ids de servicios asociados a
