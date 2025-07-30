@@ -82,7 +82,7 @@ public class VehicleModel {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.model = model == null ? null : model.trim();
     }
 
     public String getColor() {
@@ -90,7 +90,7 @@ public class VehicleModel {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = color == null ? null : color.trim();
     }
 
     public LocalDate getRegistration_date() {
@@ -99,6 +99,14 @@ public class VehicleModel {
 
     public void setRegistration_date(LocalDate registration_date) {
         this.registration_date = registration_date;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public LocalDate getSale_date() {
@@ -131,14 +139,6 @@ public class VehicleModel {
 
     public void setServices(List<ServiceModel> services) {
         this.services = services;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
 }
