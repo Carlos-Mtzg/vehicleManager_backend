@@ -94,4 +94,14 @@ public class VehicleService {
                     null);
         }
     }
+
+    public ResponseEntity<Object> getSoldVehiclesCount() {
+        long count = vehicleRepository.getSoldVehiclesCount();
+        return Utilities.generateResponse(HttpStatus.OK, "Cantidad de autos vendidos", count);
+    }
+
+    public ResponseEntity<Object> getAvailableVehiclesCount() {
+        long count = vehicleRepository.getAvailableVehiclesCount();
+        return Utilities.generateResponse(HttpStatus.OK, "Cantidad de autos disponibles", count);
+    }
 }

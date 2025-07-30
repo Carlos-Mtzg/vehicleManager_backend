@@ -46,4 +46,14 @@ public class VehicleController {
     public ResponseEntity<Object> deleteVehicle(@PathVariable("id") Long id) {
         return vehicleService.delete(id);
     }
+
+    @GetMapping("/sold/count")
+    public ResponseEntity<Object> getSoldVehiclesCount() {
+        return vehicleService.getSoldVehiclesCount();
+    }
+
+    @GetMapping("/available/count")
+    public ResponseEntity<Object> getAvailableVehiclesCount() {
+        return vehicleService.getAvailableVehiclesCount();
+    }
 }
