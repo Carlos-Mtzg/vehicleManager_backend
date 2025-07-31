@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mx.edu.utez.vehicleManager.config.Utilities;
-import mx.edu.utez.vehicleManager.module.role.IRoleRepository;
-import mx.edu.utez.vehicleManager.module.role.RoleModel;
 
 @Service
 @Primary
@@ -18,11 +16,9 @@ import mx.edu.utez.vehicleManager.module.role.RoleModel;
 public class EmployeeService {
 
     private final IEmployeeRepository employeeRepository;
-    private final IRoleRepository roleRepository;
 
-    public EmployeeService(IEmployeeRepository employeeRepository, IRoleRepository roleRepository) {
+    public EmployeeService(IEmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Transactional(readOnly = true)
@@ -41,10 +37,6 @@ public class EmployeeService {
     @Transactional
     public ResponseEntity<Object> save(EmployeeModel employee) {
         try {
-            if (employee.getRole() != null && employee.getRole().getId() != null) {
-                RoleModel role = roleRepository.findById(employee.getRole().getId()).orElse(null);
-                employee.setRole(role);
-            }
             EmployeeModel savedEmployee = this.employeeRepository.save(employee);
             return Utilities.generateResponse(HttpStatus.CREATED, "Empleado registrado exitosamente", savedEmployee);
         } catch (Exception e) {
@@ -66,16 +58,6 @@ public class EmployeeService {
                         }
                         if (dto.getEmail() != null) {
                             existingEmployee.setEmail(dto.getEmail());
-                        }
-                        if (dto.getRoleId() != null) {
-                            RoleModel role = roleRepository.findById(dto.getRoleId())
-                                    .orElse(null);
-                            if (role != null) {
-                                existingEmployee.setRole(role);
-                            } else {
-                                return Utilities.generateResponse(HttpStatus.NOT_FOUND,
-                                        "Rol no encontrado", null);
-                            }
                         }
                         EmployeeModel updated = employeeRepository.save(existingEmployee);
                         return Utilities.generateResponse(HttpStatus.OK, "Empleado actualizado exitosamente", updated);
