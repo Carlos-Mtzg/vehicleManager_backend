@@ -9,7 +9,7 @@ public class EmployeeDto {
 
     @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")
-    private String full_name;
+    private String fullName;
 
     @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 10, message = "El teléfono no puede tener más de 10 caracteres")
@@ -21,12 +21,12 @@ public class EmployeeDto {
 
     private Long roleId;
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name != null ? full_name.trim() : null;
+    public void setFullName(String fullName) {
+        this.fullName = fullName != null ? fullName.trim() : null;
     }
 
     public String getPhone() {

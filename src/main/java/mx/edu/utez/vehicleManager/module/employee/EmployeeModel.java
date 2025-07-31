@@ -33,7 +33,7 @@ public class EmployeeModel {
     @NotBlank(message = NOT_BLANK_MESSAGE)
     @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
     @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
-    private String full_name;
+    private String fullName;
 
     @NotBlank(message = NOT_BLANK_MESSAGE)
     @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
@@ -61,12 +61,12 @@ public class EmployeeModel {
         this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName != null ? fullName.trim() : null;
     }
 
     public String getPhone() {
@@ -74,7 +74,7 @@ public class EmployeeModel {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone != null ? phone.trim() : null;
     }
 
     public String getEmail() {
@@ -82,7 +82,7 @@ public class EmployeeModel {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email != null ? email.trim() : null;
     }
 
     public UserModel getUser() {

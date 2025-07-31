@@ -50,8 +50,8 @@ public class EmployeeService {
         try {
             return employeeRepository.findById(id)
                     .map(existingEmployee -> {
-                        if (dto.getFull_name() != null) {
-                            existingEmployee.setFull_name(dto.getFull_name());
+                        if (dto.getFullName() != null) {
+                            existingEmployee.setFullName(dto.getFullName());
                         }
                         if (dto.getPhone() != null) {
                             existingEmployee.setPhone(dto.getPhone());
