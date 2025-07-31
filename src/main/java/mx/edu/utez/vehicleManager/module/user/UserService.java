@@ -54,6 +54,11 @@ public class UserService {
             UserModel user = userOpt.get();
 
             if (dto.getUsername() != null && !dto.getUsername().isBlank()) {
+                Optional<UserModel> existingUser = userRepository.findByUsername(dto.getUsername());
+                if (existingUser.isPresent() && !existingUser.get().getId().equals(user.getId())) {
+                    return Utilities.generateResponse(HttpStatus.BAD_REQUEST, "El nombre de usuario ya está en uso",
+                            null);
+                }
                 user.setUsername(dto.getUsername().trim());
             }
 
@@ -113,7 +118,7 @@ public class UserService {
             user.setPassword(newPasswordEncoded);
             userRepository.save(user);
 
-            return Utilities.generateResponse(HttpStatus.OK, "Contraseña actualizada correctamente", user);
+            return Utilities.generateResponse(HttpStatus.OK, "Contraseña actualizada correctamente", null);
         } catch (Exception e) {
             return Utilities.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                     "Ocurrió un error inesperado", null);
@@ -134,6 +139,7 @@ public class UserService {
                         null);
             }
             user.setEnabled(false);
+            userRepository.save(user);
             return Utilities.generateResponse(HttpStatus.OK, "Usuario deshabilitado correctamente", null);
         } catch (Exception e) {
             return Utilities.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR,
@@ -155,6 +161,7 @@ public class UserService {
             }
 
             user.setEnabled(true);
+            userRepository.save(user);
             return Utilities.generateResponse(HttpStatus.OK, "Usuario habilitado correctamente", null);
         } catch (Exception e) {
             return Utilities.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR,
