@@ -8,16 +8,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import mx.edu.utez.vehicleManager.module.customer.CustomerModel;
-import mx.edu.utez.vehicleManager.module.role.RoleModel;
+import mx.edu.utez.vehicleManager.module.user.UserModel;
 
 @Entity
 @Table(name = "employee")
@@ -46,9 +45,8 @@ public class EmployeeModel {
     @Email(message = "Este correo electrónico no es válido")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private RoleModel role;
+    @OneToOne(mappedBy = "employee")
+    private UserModel user;
 
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
@@ -86,12 +84,12 @@ public class EmployeeModel {
         this.email = email;
     }
 
-    public RoleModel getRole() {
-        return role;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setRole(RoleModel role) {
-        this.role = role;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
 }
