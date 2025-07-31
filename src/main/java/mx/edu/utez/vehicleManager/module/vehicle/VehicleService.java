@@ -85,6 +85,10 @@ public class VehicleService {
     public ResponseEntity<Object> delete(Long id) {
         try {
             return vehicleRepository.findById(id).map(vehicle -> {
+                if (vehicle.getSale_date() != null) {
+                    return Utilities.generateResponse(HttpStatus.CONFLICT, "No se puede eliminar un vehículo vendido",
+                            null);
+                }
                 this.vehicleRepository.delete(vehicle);
                 return Utilities.generateResponse(HttpStatus.OK, "Vehículo eliminado exitosamente", id);
             }).orElseGet(() -> Utilities.generateResponse(HttpStatus.NOT_FOUND, "Vehículo no encontrado", null));
