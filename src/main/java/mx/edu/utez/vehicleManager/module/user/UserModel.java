@@ -112,6 +112,10 @@ public class UserModel implements UserDetails {
         this.employee = employee;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.getName())));
