@@ -93,4 +93,43 @@ public class EmployeeModel {
         this.user = user;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String fullName;
+        private String phone;
+        private String email;
+        private UserModel user;
+
+        public Builder fullName(String fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Builder phone(String phone) {
+            this.phone = phone;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder user(UserModel user) {
+            this.user = user;
+            return this;
+        }
+
+        public EmployeeModel build() {
+            EmployeeModel employee = new EmployeeModel();
+            employee.setFullName(fullName);
+            employee.setPhone(phone);
+            employee.setEmail(email);
+            employee.setUser(user);
+            return employee;
+        }
+    }
 }
