@@ -71,6 +71,11 @@ public class AuthService {
                                                 "El nombre de usuario ya está en uso", null);
                         }
 
+                        if (employeeRepository.findByEmail(request.getEmail()).isPresent()) {
+                                return Utilities.authResponse(HttpStatus.BAD_REQUEST,
+                                                "El correo de empleado ya está en uso", null);
+                        }
+
                         Optional<RoleModel> roleOpt = roleRepository.findById(request.getRoleId());
                         if (!roleOpt.isPresent()) {
                                 return Utilities.authResponse(HttpStatus.NOT_FOUND, "Rol de usuario no encontrado",
