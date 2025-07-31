@@ -77,6 +77,10 @@ public class ServiceService {
     public ResponseEntity<Object> delete(Long id) {
         try {
             return repository.findById(id).map(service -> {
+                if (service.getVehicles() != null && !service.getVehicles().isEmpty()) {
+                    return Utilities.generateResponse(HttpStatus.CONFLICT,
+                            "No se puede eliminar el servicio porque está asignado a uno o más vehículos", null);
+                }
                 this.repository.delete(service);
                 return Utilities.generateResponse(HttpStatus.OK, "Servicio eliminado exitosamente", id);
             })
