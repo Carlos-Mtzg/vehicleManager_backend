@@ -47,7 +47,7 @@ public class AuthService {
                         UserDetails user = userRepository.findByUsername(request.getUsername()).orElse(null);
                         if (user == null) {
                                 return Utilities.authResponse(HttpStatus.UNAUTHORIZED,
-                                                "Usuario no encontrado", null);
+                                                "Usuario y/o contraseña incorrectos", null);
                         }
 
                         authenticationManager
@@ -57,6 +57,9 @@ public class AuthService {
                         String token = jwtService.getToken(user);
                         return Utilities.authResponse(HttpStatus.OK, "Inicio de sesión correcto", token);
 
+                } catch (org.springframework.security.authentication.BadCredentialsException e) {
+                        return Utilities.authResponse(HttpStatus.UNAUTHORIZED,
+                                        "Usuario y/o contraseña incorrectos", null);
                 } catch (Exception e) {
                         return Utilities.authResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                                         "Ocurrió un error inesperado", null);
