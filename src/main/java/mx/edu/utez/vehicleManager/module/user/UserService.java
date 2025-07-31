@@ -59,7 +59,7 @@ public class UserService {
                     return Utilities.generateResponse(HttpStatus.BAD_REQUEST, "El nombre de usuario ya está en uso",
                             null);
                 }
-                user.setUsername(dto.getUsername().trim());
+                user.setUsername(dto.getUsername());
             }
 
             if (dto.getEnabled() != null) {
@@ -83,7 +83,7 @@ public class UserService {
                     employee.setPhone(dto.getPhone());
                 }
                 if (dto.getEmail() != null && !dto.getEmail().isBlank()) {
-                    Optional<EmployeeModel> existingEmail = employeeRepository.findByEmail(dto.getEmail().trim());
+                    Optional<EmployeeModel> existingEmail = employeeRepository.findByEmail(dto.getEmail());
                     if (existingEmail.isPresent() && !existingEmail.get().getId().equals(employee.getId())) {
                         return Utilities.generateResponse(HttpStatus.BAD_REQUEST, "El correo ya está en uso", null);
                     }
