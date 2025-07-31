@@ -29,6 +29,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/register").hasAuthority("ADMIN")
+                        .requestMatchers("/api/user/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/brand/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
+                        .requestMatchers("/api/customer/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
+                        .requestMatchers("/api/employee/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
+                        .requestMatchers("/api/service/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
+                        .requestMatchers("/api/vehicle/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
                         .anyRequest().authenticated())
                 .sessionManagement(
                         sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
