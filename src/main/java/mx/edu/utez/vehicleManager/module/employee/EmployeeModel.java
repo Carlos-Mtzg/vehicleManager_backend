@@ -46,6 +46,7 @@ public class EmployeeModel {
     private String email;
 
     @OneToOne(mappedBy = "employee")
+    @JsonIgnore
     private UserModel user;
 
     @OneToMany(mappedBy = "employee")
