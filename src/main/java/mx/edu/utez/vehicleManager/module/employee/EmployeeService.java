@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mx.edu.utez.vehicleManager.config.Utilities;
-import mx.edu.utez.vehicleManager.module.role.IRoleRepository;
-import mx.edu.utez.vehicleManager.module.role.RoleModel;
+import mx.edu.utez.vehicleManager.utils.Utilities;
 
 @Service
 @Primary
@@ -18,11 +16,9 @@ import mx.edu.utez.vehicleManager.module.role.RoleModel;
 public class EmployeeService {
 
     private final IEmployeeRepository employeeRepository;
-    private final IRoleRepository roleRepository;
 
-    public EmployeeService(IEmployeeRepository employeeRepository, IRoleRepository roleRepository) {
+    public EmployeeService(IEmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Transactional(readOnly = true)
@@ -41,10 +37,6 @@ public class EmployeeService {
     @Transactional
     public ResponseEntity<Object> save(EmployeeModel employee) {
         try {
-            if (employee.getRole() != null && employee.getRole().getId() != null) {
-                RoleModel role = roleRepository.findById(employee.getRole().getId()).orElse(null);
-                employee.setRole(role);
-            }
             EmployeeModel savedEmployee = this.employeeRepository.save(employee);
             return Utilities.generateResponse(HttpStatus.CREATED, "Empleado registrado exitosamente", savedEmployee);
         } catch (Exception e) {
@@ -58,24 +50,14 @@ public class EmployeeService {
         try {
             return employeeRepository.findById(id)
                     .map(existingEmployee -> {
-                        if (dto.getFull_name() != null) {
-                            existingEmployee.setFull_name(dto.getFull_name());
+                        if (dto.getFullName() != null) {
+                            existingEmployee.setFullName(dto.getFullName());
                         }
                         if (dto.getPhone() != null) {
                             existingEmployee.setPhone(dto.getPhone());
                         }
                         if (dto.getEmail() != null) {
                             existingEmployee.setEmail(dto.getEmail());
-                        }
-                        if (dto.getRoleId() != null) {
-                            RoleModel role = roleRepository.findById(dto.getRoleId())
-                                    .orElse(null);
-                            if (role != null) {
-                                existingEmployee.setRole(role);
-                            } else {
-                                return Utilities.generateResponse(HttpStatus.NOT_FOUND,
-                                        "Rol no encontrado", null);
-                            }
                         }
                         EmployeeModel updated = employeeRepository.save(existingEmployee);
                         return Utilities.generateResponse(HttpStatus.OK, "Empleado actualizado exitosamente", updated);

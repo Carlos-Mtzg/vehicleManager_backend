@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mx.edu.utez.vehicleManager.config.Utilities;
+import mx.edu.utez.vehicleManager.utils.Utilities;
 import mx.edu.utez.vehicleManager.module.customer.CustomerModel;
 import mx.edu.utez.vehicleManager.module.customer.ICustomerRepository;
 import mx.edu.utez.vehicleManager.module.service.IServiceRepository;
