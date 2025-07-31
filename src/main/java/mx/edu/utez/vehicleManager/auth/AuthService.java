@@ -91,7 +91,7 @@ public class AuthService {
                         employee = employeeRepository.save(employee);
 
                         UserModel user = UserModel.builder()
-                                        .username(request.getUsername())
+                                        .username(request.getUsername().toUpperCase())
                                         .password(passwordEncoder.encode(request.getPassword()))
                                         .enabled(request.isEnabled())
                                         .employee(employee)

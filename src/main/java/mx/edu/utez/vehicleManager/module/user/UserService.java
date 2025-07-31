@@ -54,12 +54,12 @@ public class UserService {
             UserModel user = userOpt.get();
 
             if (dto.getUsername() != null && !dto.getUsername().isBlank()) {
-                Optional<UserModel> existingUser = userRepository.findByUsername(dto.getUsername());
+                Optional<UserModel> existingUser = userRepository.findByUsername(dto.getUsername().toUpperCase());
                 if (existingUser.isPresent() && !existingUser.get().getId().equals(user.getId())) {
                     return Utilities.generateResponse(HttpStatus.BAD_REQUEST, "El nombre de usuario ya está en uso",
                             null);
                 }
-                user.setUsername(dto.getUsername());
+                user.setUsername(dto.getUsername().toUpperCase());
             }
 
             if (dto.getEnabled() != null) {
