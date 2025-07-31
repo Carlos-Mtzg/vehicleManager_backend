@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import mx.edu.utez.vehicleManager.module.vehicle.IVehicleRepository;
 import mx.edu.utez.vehicleManager.utils.Utilities;
 
 @Service
@@ -18,9 +19,11 @@ import mx.edu.utez.vehicleManager.utils.Utilities;
 public class BrandService {
 
     private final IBrandRepository repository;
+    private final IVehicleRepository vehicleRepository;
 
-    public BrandService(IBrandRepository repository) {
+    public BrandService(IBrandRepository repository, IVehicleRepository vehicleRepository) {
         this.repository = repository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Transactional(readOnly = true)
@@ -76,6 +79,10 @@ public class BrandService {
         try {
             return repository.findById(id)
                     .map(brand -> {
+                        if (vehicleRepository.existsByBrand(brand)) {
+                            return Utilities.generateResponse(HttpStatus.CONFLICT,
+                                    "No se puede eliminar la marca porque tiene vehículos asignados", id);
+                        }
                         this.repository.delete(brand);
                         return Utilities.generateResponse(HttpStatus.OK, "Marca eliminada exitosamente", null);
                     })
