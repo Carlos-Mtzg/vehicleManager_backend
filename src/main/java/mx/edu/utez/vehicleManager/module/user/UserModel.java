@@ -46,6 +46,7 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     @NotBlank(message = NOT_BLANK_MESSAGE)
     @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     private String password;
 
     @Column(nullable = true)
