@@ -50,6 +50,11 @@ public class AuthService {
                                                 "Usuario y/o contraseña incorrectos", null);
                         }
 
+                        if (!user.isEnabled()) {
+                                return Utilities.authResponse(HttpStatus.UNAUTHORIZED,
+                                                "Ocurrió un error al intentar iniciar sesíon", null);
+                        }
+
                         authenticationManager
                                         .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),
                                                         request.getPassword()));
