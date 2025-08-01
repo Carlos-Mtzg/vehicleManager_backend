@@ -1,6 +1,7 @@
 package mx.edu.utez.vehicleManager.module.sale;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/sale")
+@CrossOrigin(origins = "*")
 public class SaleController {
 
     private final SaleService saleService;
