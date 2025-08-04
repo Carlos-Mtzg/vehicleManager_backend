@@ -2,7 +2,6 @@ package mx.edu.utez.vehicleManager.module.employee;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,11 +41,6 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateEmployee(@PathVariable("id") Long id, @RequestBody @Valid EmployeeDto request) {
         return employeeService.update(id, request);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteEmployee(@PathVariable("id") Long id) {
-        return employeeService.delete(id);
     }
 
 }
