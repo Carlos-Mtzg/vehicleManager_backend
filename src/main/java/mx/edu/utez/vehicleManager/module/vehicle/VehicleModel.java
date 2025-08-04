@@ -1,6 +1,7 @@
 package mx.edu.utez.vehicleManager.module.vehicle;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +15,12 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import mx.edu.utez.vehicleManager.module.brand.BrandModel;
 import mx.edu.utez.vehicleManager.module.customer.CustomerModel;
 import mx.edu.utez.vehicleManager.module.service.ServiceModel;
@@ -22,22 +29,39 @@ import mx.edu.utez.vehicleManager.module.service.ServiceModel;
 @Table(name = "vehicle")
 public class VehicleModel {
 
+    public static final String NOT_BLANK_MESSAGE = "Este campo no puede estar vacío";
+    public static final String NO_ANGLE_BRACKETS_MESSAGE = "No se permiten los caracteres < o >";
+    public static final String NOT_NULL_MESSAGE = "Este campo es obligatorio";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
     private String model;
+
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Pattern(regexp = "^[^<>]*$", message = NO_ANGLE_BRACKETS_MESSAGE)
+    @Size(max = 50, message = "Este campo no puede tener más de 50 caracteres")
     private String color;
-    private Date registration_date;
-    private Double price;
-    private Date sale_date;
+
+    private LocalDate registration_date;
+
+    @NotNull(message = NOT_NULL_MESSAGE)
+    @Positive(message = "El precio debe ser mayor a 0")
+    @Digits(integer = 7, fraction = 2, message = "El precio debe tener máximo 7 dígitos enteros y 2 decimales")
+    private BigDecimal price;
+
+    private LocalDate sale_date;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private BrandModel brand;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = true)
     private CustomerModel customer;
 
     @ManyToMany
@@ -58,7 +82,7 @@ public class VehicleModel {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.model = model == null ? null : model.trim();
     }
 
     public String getColor() {
@@ -66,30 +90,30 @@ public class VehicleModel {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = color == null ? null : color.trim();
     }
 
-    public Date getRegistration_date() {
+    public LocalDate getRegistration_date() {
         return registration_date;
     }
 
-    public void setRegistration_date(Date registration_date) {
+    public void setRegistration_date(LocalDate registration_date) {
         this.registration_date = registration_date;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Date getSale_date() {
+    public LocalDate getSale_date() {
         return sale_date;
     }
 
-    public void setSale_date(Date sale_date) {
+    public void setSale_date(LocalDate sale_date) {
         this.sale_date = sale_date;
     }
 
