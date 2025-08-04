@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import mx.edu.utez.vehicleManager.module.employee.EmployeeModel;
+import mx.edu.utez.vehicleManager.module.user.UserModel;
 
 @Entity
 @Table(name = "role")
@@ -23,7 +23,7 @@ public class RoleModel {
 
     @OneToMany(mappedBy = "role")
     @JsonIgnore
-    private List<EmployeeModel> employees;
+    private List<UserModel> users;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class RoleModel {
         this.name = name;
     }
 
-    public List<EmployeeModel> getEmployees() {
-        return employees;
+    public List<UserModel> getUsers() {
+        return users;
     }
 
-    public void setEmployees(List<EmployeeModel> employees) {
-        this.employees = employees;
+    public void setUsers(List<UserModel> users) {
+        this.users = users;
     }
 
 }
