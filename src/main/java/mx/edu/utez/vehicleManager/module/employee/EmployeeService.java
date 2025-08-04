@@ -68,18 +68,4 @@ public class EmployeeService {
                     null);
         }
     }
-
-    @Transactional
-    public ResponseEntity<Object> delete(Long id) {
-        try {
-            return employeeRepository.findById(id).map(employee -> {
-                this.employeeRepository.delete(employee);
-                return Utilities.generateResponse(HttpStatus.OK, "Empleado eliminado exitosamente", id);
-            }).orElseGet(() -> Utilities.generateResponse(HttpStatus.NOT_FOUND, "Empleado no encontrado", null));
-        } catch (Exception e) {
-            return Utilities.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Ocurrió un error al eliminar el registro",
-                    null);
-        }
-    }
 }
