@@ -2,8 +2,12 @@ package mx.edu.utez.vehicleManager.module.sale;
 
 import java.util.List;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SaleDto {
+    @NotNull(message = "El id del vehículo es obligatorio")
     private Long vehicleId;
+    @NotNull(message = "El id del cliente es obligatorio")
     private Long customerId;
     private List<Long> serviceIds;
 
