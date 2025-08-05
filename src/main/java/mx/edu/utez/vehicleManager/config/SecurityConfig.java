@@ -34,7 +34,6 @@ public class SecurityConfig {
                         .requestMatchers("/auth/register").hasAuthority("ADMIN")
                         .requestMatchers("/api/user/change-password/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
                         .requestMatchers("/api/user/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/brand/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
                         .requestMatchers("/api/customer/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
                         .requestMatchers("/api/employee/**").hasAnyAuthority("ADMIN", "EMPLOYEE")
