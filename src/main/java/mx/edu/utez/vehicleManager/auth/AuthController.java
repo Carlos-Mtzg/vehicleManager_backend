@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -31,16 +30,6 @@ public class AuthController {
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
         return authService.login(request);
-    }
-
-    @PostMapping("/register")
-    @Operation(summary = "Registro de usuario", description = "Registra un nuevo usuario y retorna un token JWT si el registro es exitoso.")
-    @ApiResponse(responseCode = "201", description = "Usuario registrado correctamente")
-    @ApiResponse(responseCode = "400", description = "Datos inválidos o el usuario ya existe")
-    @ApiResponse(responseCode = "404", description = "Rol de usuario no encontrado")
-    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    public ResponseEntity<Object> register(@RequestBody @Valid RegisterRequest request) {
-        return authService.register(request);
     }
 
 }
